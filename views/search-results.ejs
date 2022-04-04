@@ -1,0 +1,42 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+    <% if(logged == true){ %>
+        <%- include("./partials/nav2.ejs") %>
+    <% } else {%>
+        <%- include("./partials/nav.ejs") %>
+    <% } %>
+
+  
+  <div id="page-container">
+    <div id="content-wrap">
+      <h1>Search for books</h1>
+<form method="POST" action="/search">
+    Enter keywords:<br>
+    <input type="text" name="keywords">
+    
+    <input type="submit" value="Submit">
+</form>
+<h2>You searched for '<%-key%>'</h2>
+<div class="books list">
+
+    <% if (books.length > 0) { %>
+      <% books.forEach(book => { %>
+        <a  class="single", href="/browse/<%=book._id%>" >
+          <h3><%= book.title %></h3>
+          <%= book.authour%><br>
+          <%= book.pubdate.split('-')[0]%><br>
+          </a>
+      <% }) %>
+    <% } else { %>
+      <p>No books found...</p>
+    <% } %>
+    
+  </div>
+    </div>
+    <%- include("./partials/footer.ejs") %>
+  </div>
+  
+</body>
+</html>

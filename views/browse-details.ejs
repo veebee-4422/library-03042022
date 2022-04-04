@@ -1,0 +1,24 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+  <% if(logged == false){ %>
+    <%- include("./partials/nav.ejs") %>
+  <% } else if(logged == true){%>
+    <%- include("./partials/nav2.ejs") %>
+  <% } %>
+
+  <div class="details content">
+    <h2><%= book.title %></h2>
+    <div class="content">
+      <p><%= book.authour %> <br> <%= book.pubdate.split('-')[0] %></p><br>
+      <p><%= book.desc %></p>
+    </div>
+    <br>
+    <a href="/file/<%= book.update %>"> Open file</a>
+    <br><br>
+  </div>
+
+  <%- include("./partials/footer.ejs") %>
+</body>
+</html>

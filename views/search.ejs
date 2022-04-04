@@ -1,0 +1,20 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+    <% if(logged == true){ %>
+        <%- include("./partials/nav2.ejs") %>
+    <% } else {%>
+        <%- include("./partials/nav.ejs") %>
+    <% } %>
+
+  <h1>Search for books</h1>
+<form method="POST" action="/search">
+    Enter keywords:<br>
+    <input type="text" name="keywords">
+    <input type="submit" value="Submit">
+</form>
+
+  <%- include("./partials/footer.ejs") %>
+</body>
+</html>

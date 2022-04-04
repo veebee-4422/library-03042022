@@ -1,0 +1,17 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+  <%- include("./partials/nav.ejs") %>
+  <div class="login-failure"></div>
+    <p>You entered the wrong password! <br><br>
+      Try to <a href="/login">login</a> again
+    </p>
+    <p>Or 
+       <a href="/register">register here</a>
+    </p>
+  </div>
+
+  <%- include("./partials/footer.ejs") %>
+</body>
+</html>

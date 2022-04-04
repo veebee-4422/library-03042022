@@ -1,0 +1,37 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+
+    <% if(logged == true){ %>
+        <%- include("./partials/nav2.ejs") %>
+    <% } else {%>
+        <%- include("./partials/nav.ejs") %>
+    <% } %>
+
+
+  
+  <div id="page-container">
+    <div id="content-wrap">
+      <div class="books list">
+        <h2>All Books</h2>
+    
+        <% if (books.length > 0) { %>
+          <% books.forEach(book => { %>
+            <a  class="single", href="/browse/<%=book._id%>" >
+              <h3><%= book.title %></h3>
+              <%= book.authour%><br>
+              <%= book.pubdate.split('-')[0]%></p>
+              </a>
+          <% }) %>
+        <% } else { %>
+          <p>There are no books to display...</p>
+        <% } %>
+        
+      </div>
+    </div>
+    <%- include("./partials/footer.ejs") %>
+  </div>
+  
+</body>
+</html>

@@ -1,0 +1,25 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+  <%- include("./partials/nav2.ejs") %>
+
+  <h1>Upload Book</h1>
+<form method="POST" action="/upload-file" enctype="multipart/form-data" >
+  
+    Enter Title:<br>
+    <input type="text" name="title" required><br>
+    Enter description:<br>
+    <textarea id = "desc" type="text" name="desc" required> </textarea><br>
+    Enter Publishing date:<br>
+    <input type="month" name="pubdate" required><br>
+    Enter Authour:<br>
+    <input type="text" name="authour" required><br>
+    Upload file:<br>
+    <input type="file" name="file" id="inputFile" required accept="application/pdf"><br>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+  <%- include("./partials/footer.ejs") %>
+</body>
+</html>

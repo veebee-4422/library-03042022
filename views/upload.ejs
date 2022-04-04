@@ -1,0 +1,33 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+<%- include("./partials/nav2.ejs") %>
+<div id="page-container">
+    <div id="content-wrap">
+      <div class="books list">
+        <h2>All Your Books</h2>
+    
+        <% if (books.length > 0) { %>
+          <% books.forEach(book => { %>
+            <%if(book.uploaderid == user.id){%>
+              <a  class="single", href="/upload/<%=book._id%>" >
+                <h3><%= book.title %></h3>
+                <%= book.authour%><br>
+                <%= book.pubdate.split('-')[0]%></p>
+              </a>
+              <%} else {%>
+    
+              <%}%>
+          <% }) %>
+        <% } else { %>
+          <p>There are no uploaded books...</p>
+        <% } %>
+        <p><a href = '/upload-file'>Upload Book</a></p>
+        
+      </div>
+    </div>
+    <%- include("./partials/footer.ejs") %>
+  </div>
+</body>
+</html>
