@@ -7,18 +7,36 @@
   <% } else if(logged == true){%>
     <%- include("./partials/nav2.ejs") %>
   <% } %>
+  <div class="row">
+    <div class="col-12 py-5">
+      <div class="container">
+        <div class="row pb-3">
+          <h2><%= book.title %></h2>
+          <div class="content">
+            <p><%= book.authour %> <br> <%= book.pubdate.split('-')[0] %></p><br>
+            <p><%= book.desc %></p>
+          </div>
+        </div>
 
-  <div class="details content">
-    <h2><%= book.title %></h2>
-    <div class="content">
-      <p><%= book.authour %> <br> <%= book.pubdate.split('-')[0] %></p><br>
-      <p><%= book.desc %></p>
+      <div class="row justify-content-center pb-3">
+        <div class="col-2 d-flex justify-content-center">
+          <button type="button" id="open-file-button" class="btn btn-primary">Open file</button>
+        </div>
+
+      </div>
+
+      </div>
     </div>
-    <br>
-    <a href="/file/<%= book.update %>"> Open file</a>
-    <br><br>
   </div>
 
   <%- include("./partials/footer.ejs") %>
+  <%- include("./partials/script.ejs") %>
+  <script>
+    $(document).ready(() => {
+        $('#open-file-button').click(()=>{
+            window.location.href = '/file/<%= book.update %>';
+        })
+    });
+</script>
 </body>
 </html>

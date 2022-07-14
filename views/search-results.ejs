@@ -7,36 +7,57 @@
     <% } else {%>
         <%- include("./partials/nav.ejs") %>
     <% } %>
-
+    <div class="row">
+      <div class="container px-5 py-3">
+          <div class="col-12">
+              <h2>Search for books</h2>
+          </div>
   
-  <div id="page-container">
-    <div id="content-wrap">
-      <h1>Search for books</h1>
-<form method="POST" action="/search">
-    Enter keywords:<br>
-    <input type="text" name="keywords">
-    
-    <input type="submit" value="Submit">
-</form>
-<h2>You searched for '<%-key%>'</h2>
-<div class="books list">
-
-    <% if (books.length > 0) { %>
-      <% books.forEach(book => { %>
-        <a  class="single", href="/browse/<%=book._id%>" >
-          <h3><%= book.title %></h3>
-          <%= book.authour%><br>
-          <%= book.pubdate.split('-')[0]%><br>
-          </a>
-      <% }) %>
-    <% } else { %>
-      <p>No books found...</p>
-    <% } %>
-    
+      </div>
   </div>
-    </div>
+  <div class="row content-row bg-light py-4">
+      <form method="POST" action="/search" id="search-form">
+          <div class="row justify-content-center">
+              <div class="col-6 input-group">
+                  <input type="search" name="keywords" class="form-control rounded mx-1" placeholder="Search"
+                      aria-label="Search" aria-describedby="search-addon" />
+                  <button type="button" class="btn btn-outline-primary rounded mx-1"
+                      id="submit-search-query">Search</button>
+              </div>
+          </div>
+  
+      </form>
+  </div>
+  <div class="row">
+      <div class="container px-5 py-3">
+          <div class="col-12">
+              <h3>Search results for: <i>'<%-key%>'</i></h3>
+          </div>
+  
+      </div>
+  </div>
+  <div class="row content-row bg-light py-4">
+      <% if (books.length> 0) { %>
+          <% books.forEach(book=> { %>
+              <a class="single" , href="/browse/<%=book._id%>">
+                  <div class="container section p-3">
+                      <p>
+                      <h3>
+                          <%= book.title %>
+                      </h3>
+                      <%= book.authour%><br>
+                          <%= book.pubdate.split('-')[0]%>
+                              </p>
+                  </div>
+              </a>
+          <% }) %>
+      <% } else { %>
+          <div class="container section p-3">
+              <p>There are no books to display...</p>
+          </div>
+      <% } %>
+  </div>
     <%- include("./partials/footer.ejs") %>
-  </div>
-  
+    <%- include("./partials/script.ejs") %>
 </body>
 </html>

@@ -3,20 +3,43 @@
 
 <body>
   <%- include("./partials/nav.ejs") %>
-  
-<h1>Register Page</h1>
-  <form method="post" action="register">
-      Enter Username:<br>
-      <input type="text" name="username"><br>
-      Enter Password:<br>
-      <input type="password" name="password"><br><br>
-      <input type="submit" value="Submit">
-  </form>
-<p>
-  Already registered? <a href="/login">Login here</a>
-</p>
-
+  <div class="row">
+    <div class="container px-5 py-3">
+        <div class="col-12">
+            <h2>Register Page</h2>
+        </div>
+    </div>
+</div>
+<div class="row content-row bg-light py-4 justify-content-center">
+    <div class="col-6">
+        <form method="POST" action="/register" id="register-form">
+            <!-- Email input -->
+            <div class="form-floating row mb-3">
+                <input type="text" name="username" class="form-control" id="floatingInput"
+                    placeholder="name@example.com">
+                <label for="floatingInput">Username</label>
+            </div>
+            <div class="form-floating row mb-3">
+                <input type="password" name="password" class="form-control" id="floatingPassword"
+                    placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
+            <!-- Submit button -->
+            <div class="submit-button row justify-content-center">
+                <div class="col-3 d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary btn-block mb-4" id="register-button" onclick="">Sign
+                        Up</button>
+                </div>
+            </div>
+            <!-- Register buttons -->
+            <div class="text-center row">
+                <p>Already a member? <a href="/login">Log in</a></p>
+            </div>
+        </form>
+    </div>
+</div>
   <%- include("./partials/footer.ejs") %>
+  <%- include("./partials/script.ejs") %>
 </body>
 </html>
 

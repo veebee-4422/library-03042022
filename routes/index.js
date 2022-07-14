@@ -40,7 +40,7 @@ const upload = multer({storage: storage});
 
 // -------------- POST ROUTES ----------------
 
- router.post('/login', passport.authenticate('local', { failureRedirect: '/login-failure', successRedirect: '/login' }));
+ router.post('/login', passport.authenticate('local', { failureRedirect: '/login?alert=1', successRedirect: '/login' }));
 
  router.post('/register', (req, res, next) => {
     
@@ -58,19 +58,22 @@ const upload = multer({storage: storage});
     User.findOne({username: newUser.username})
         .then((user)=>{
             if(!user){
-                newUser.save()
+                newUser.save();
+                res.redirect('/login?alert=2');
+            } else {
+                res.redirect('/login?alert=3');
             }
         })
         .catch((err) => {
             console.log(err);
-            res.status(404).render('404');
+            res.status(404).render('404', {page: '404'});
         });
     
-    res.redirect('/login');
+  
  });
  router.post('/upload-file', upload.single('file'), (req, res, next) => {
     if(!req.body.safe){
-        res.render('incorrect');
+        res.redirect('/upload-file?alert=5');
     }
     else{
         const newBook = new Book({
@@ -97,7 +100,7 @@ const upload = multer({storage: storage});
         .then(dropCache())
         .catch((err) => {
             console.log(err);
-            res.status(404).render('404');
+            res.status(404).render('404', {page: '404'});
         });
     
     res.redirect('/upload');
@@ -138,15 +141,11 @@ const upload = multer({storage: storage});
         }
       ])
     .then((result)=>{
-        if (req.isAuthenticated()) {
-            res.render('search-results', {books: result, key: keywords, logged: true});
-        } else {
-            res.render('search-results', {books: result, key: keywords, logged: false});
-        }
+        res.render('search-results', {books: result, key: keywords, logged: req.isAuthenticated(), page: 'search'});
     })
     .catch((err) => {
         console.log(err);
-        res.status(404).render('404');
+        res.status(404).render('404', {page: '404'});
     });;
 
 })
@@ -154,11 +153,8 @@ const upload = multer({storage: storage});
 // -------------- GET ROUTES ----------------
 
 router.get('/', (req, res, next) => {
-    if (req.isAuthenticated()) {
-        res.render('about', {books: [], logged: true});
-    } else {
-        res.render('about', {books: [], logged: false});
-}}) ;
+    res.render('about', {books: [], logged: req.isAuthenticated(), page: 'about'});
+}) ;
 router.get('/browse', async(req, res, next) => {
     getSetCache('books', ()=>{
         return new Promise((resolve, reject)=>{
@@ -168,15 +164,11 @@ router.get('/browse', async(req, res, next) => {
         })
     })
     .then((books)=>{
-        if (req.isAuthenticated()) {
-            res.render('browse', {books: books, logged: true});
-        } else {
-            res.render('browse', {books: books, logged: false});
-        }
+        res.render('browse', {books: books, logged: req.isAuthenticated(), page: 'browse'});
     })
     .catch((err) => {
         console.log(err);
-        res.status(404).render('404');
+        res.status(404).render('404', {page: '404'});
     });
 });
 router.get('/browse/:id', (req, res, next) =>{
@@ -191,32 +183,27 @@ router.get('/browse/:id', (req, res, next) =>{
     .then((books)=>{
         books.forEach(book => {
             if(book._id == id){
-                if (req.isAuthenticated()){
-                    res.render('browse-details', {book: book, logged: true});
-                } else {
-                    res.render('browse-details', {book: book, logged: false});
-                }
-            } else {
+                res.render('browse-details', {book: book, logged: req.isAuthenticated(), page: 'browse'});
             }
         });
     })
     .catch((err) => {
         console.log(err);
-        res.status(404).render('404');
+        res.status(404).render('404', {page: '404'});
     });
 });
 router.get('/login', (req, res, next) => {
     if (req.isAuthenticated()) {
         res.redirect('/');
     } else {
-        res.render('login');
+        res.render('login', {page: 'login', alertCode: req.query.alert});
     }
 });
 router.get('/register', (req, res, next) => {
     if (req.isAuthenticated()) {
-        res.redirect('/');
+        res.redirect('/logout');
     } else {
-        res.render('register');
+        res.render('register', {page: 'login'});
     } 
 });
 router.get('/upload', (req, res, next) => {
@@ -229,14 +216,14 @@ router.get('/upload', (req, res, next) => {
     })
     .then((books)=>{
         if (req.isAuthenticated()) {
-            res.render('upload', {user: req.user, books: books, logged: true});
+            res.render('upload', {user: req.user, books: books, logged: true, page: 'upload'});
         } else {
-            res.redirect('/login');
+            res.redirect('/login?alert=4');
         }
     })
     .catch((err) => {
         console.log(err);
-        res.status(404).render('404');
+        res.status(404).render('404', {page: '404'});
     });
 });
 router.get('/upload/:id', (req, res, next) =>{
@@ -252,9 +239,9 @@ router.get('/upload/:id', (req, res, next) =>{
         books.forEach(book => {
             if(book._id == id){
                 if (req.isAuthenticated()) {
-                    res.render('upload-details', {book: book, logged: true, });
+                    res.render('upload-details', {book: book, logged: true, page: 'upload' });
                 } else {
-                    res.redirect('/login');
+                    res.redirect('/login?alert=6');
                 }
             } else {
             }
@@ -262,7 +249,7 @@ router.get('/upload/:id', (req, res, next) =>{
     })
     .catch((err) => {
         console.log(err);
-        res.status(404).render('404');
+        res.status(404).render('404', {page: '404'});
     });
 });
 router.get('/file/:update', (req, res, next) =>{
@@ -272,22 +259,18 @@ router.get('/file/:update', (req, res, next) =>{
             readstream.pipe(res);
         }
         else{
-            res.status(404).render('404');
+            res.status(404).render('404', {page: '404'});
         }
     });
 
 
 });
 router.get('/search', (req, res, next)=>{
-    if (req.isAuthenticated()) {
-        res.render('search', {logged: true});
-    } else {
-        res.render('search', {logged: false});
-    }
+    res.render('search', {logged: req.isAuthenticated(), page: 'search'});
 })
 router.get('/upload-file', (req, res, next) => {
     if (req.isAuthenticated()) {
-        res.render('upload-file');
+        res.render('upload-file', {page: 'upload', alertCode: req.query.alert});
     } else {
         res.redirect('/login');
     }
@@ -296,10 +279,6 @@ router.get('/logout', (req, res, next) => {
     req.logout();
     res.redirect('/login');
 });
-router.get('/login-failure', (req, res, next) => {
-    res.render('login-failure');
-});
-
 // -------------- DELETE ROUTE ----------------
 
 router.get('/delete', (req, res) =>{
@@ -313,7 +292,7 @@ router.get('/delete', (req, res) =>{
     })
     .catch((err) => {
         console.log(err);
-        res.status(404).render('404');
+        res.status(404).render('404', {page: '404'});
     });
 });
 

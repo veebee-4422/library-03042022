@@ -4,22 +4,58 @@
 <body>
   <%- include("./partials/nav2.ejs") %>
 
-  <div class="details content">
-    <h2><%= book.title %></h2>
-    <div class="content">
-      <p><%= book.authour %> <br> <%= book.pubdate.split('-')[0] %></p>
-      <p><%= book.desc %></p>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Request Confirmation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this uploaded book?
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="delete-file-button" class="btn btn-danger">Yes, delete</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No, don't delete</button>
+      </div>
     </div>
-    <a href="/file/<%= book.update %>"> 
-      Open file
-    </a>
-    <br><br>
-    <a href="/delete?ID=<%= book._id%>&UD=<%=book.update %>">
-      Delete
-    </a>
-    <br><br><br>
+  </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 py-5">
+      <div class="container">
+        <div class="row pb-3">
+          <h2><%= book.title %></h2>
+          <div class="content">
+            <p><%= book.authour %> <br> <%= book.pubdate.split('-')[0] %></p><br>
+            <p><%= book.desc %></p>
+          </div>
+        </div>
+        <div class="row justify-content-center pb-3">
+          <div class="col-2 d-flex justify-content-center">
+            <button type="button" id="open-file-button" class="btn btn-primary">Open file</button>
+          </div>
+          <div class="col-2 d-flex justify-content-center">
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete file</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <%- include("./partials/footer.ejs") %>
+  <%- include("./partials/script.ejs") %>
+  <script>
+    $(document).ready(() => {
+        $('#open-file-button').click(()=>{
+            window.location.href = '/file/<%= book.update %>';
+        })
+        $('#delete-file-button').click(()=>{
+            window.location.href = '/delete?ID=<%= book._id%>&UD=<%=book.update %>';
+        })
+    });
+</script>
 </body>
 </html>
