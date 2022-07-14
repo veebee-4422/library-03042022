@@ -153,7 +153,11 @@ const upload = multer({storage: storage});
 // -------------- GET ROUTES ----------------
 
 router.get('/', (req, res, next) => {
-    res.render('about', {books: [], logged: req.isAuthenticated(), page: 'about'});
+    if (req.isAuthenticated()) {
+        res.render('about', {books: [], logged: true, page: 'about'});
+    } else {
+        res.render('about', {books: [], logged: false, page: 'about'});
+    }
 }) ;
 router.get('/browse', async(req, res, next) => {
     getSetCache('books', ()=>{
