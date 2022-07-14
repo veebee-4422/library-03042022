@@ -7,27 +7,31 @@
     <% } else {%>
         <%- include("./partials/nav.ejs") %>
     <% } %>
-    <div class="row">
-      <div class="container px-5 py-3">
-          <div class="col-12">
-              <h2>Search for books</h2>
-          </div>
-  
-      </div>
-    </div>
-    <div class="row content-row bg-light py-4">
-        <form method="POST" action="/search" id="search-form">
-            <div class="row justify-content-center">
-                <div class="col-6 input-group">
-                    <input type="search" name="keywords" class="form-control rounded mx-1" placeholder="Search"
-                        aria-label="Search" aria-describedby="search-addon" />
-                    <button type="button" class="btn btn-outline-primary rounded mx-1"
-                        id="submit-search-query">Search</button>
+    <div class="flex-wrapper">
+        <div class="container-box">
+            <div class="row">
+                <div class="container px-5 py-3">
+                    <div class="col-12">
+                        <h2>Search for books</h2>
+                    </div>
+            
                 </div>
-            </div>
-        </form>
+              </div>
+              <div class="row content-row bg-light py-4">
+                  <form method="POST" action="/search" id="search-form">
+                      <div class="row justify-content-center">
+                          <div class="col-6 input-group">
+                              <input type="search" name="keywords" class="form-control rounded mx-1" placeholder="Search"
+                                  aria-label="Search" aria-describedby="search-addon" />
+                              <button type="button" class="btn btn-outline-primary rounded mx-1"
+                                  id="submit-search-query">Search</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+        </div>
+        <%- include("./partials/footer.ejs") %>
     </div>
-  <%- include("./partials/footer.ejs") %>
   <%- include("./partials/script.ejs") %>
 </body>
 </html>

@@ -9,53 +9,56 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   <% } %>
-
-  <div class="row">
-    <div class="container px-5 py-3">
-        <div class="col-12">
-            <h2>Upload Book</h2>
+  <div class="flex-wrapper">
+    <div class="container-box">
+      <div class="row">
+        <div class="container px-5 py-3">
+            <div class="col-12">
+                <h2>Upload Book</h2>
+            </div>
         </div>
-    </div>
-  </div>
-  <div class="row content-row bg-light py-4 justify-content-center">
-      <div class="col-6">
-        <form method="POST" action="/upload-file" id="upload-form" enctype="multipart/form-data">
-          <!-- title input -->
-          <div class="form-outline mb-4">
-            <label class="form-label" for="book-title">Title</label>
-            <input type="text" name="title" required id="book-title" class="form-control" />
-          </div>
-      
-          <!-- desc input -->
-          <div class="form-outline mb-4">
-            <label class="form-label" for="desc">Description</label>
-            <textarea class="form-control" id = "desc" type="text" name="desc" required rows="4"></textarea>
-          </div>
-      
-          <!-- date input -->
-          <div class="form-outline mb-4">
-            <label class="form-label" for="book-date">Publishing Date</label>
-            <input type="month" name="pubdate" required id="book-date" class="form-control" />
-          </div>
-      
-          <!-- authour input -->
-          <div class="form-outline mb-4">
-            <label class="form-label" for="book-authour">Authour</label>
-            <input type="text" name="authour" required id="book-authour" class="form-control" />
-          </div>
-      
-          <!-- file input -->
-          <div class="form-outline mb-4">
-            <label class="form-label" for="inputFile">Upload file</label>
-            <input type="file" name="file" id="inputFile" required accept="application/pdf" class="form-control"/>
-          </div>
-        
-          <!-- Submit button -->
-          <button type="submit" class="btn btn-primary btn-block mb-4" id="upload-book">Upload Book</button>
-        </form>
       </div>
+      <div class="row content-row bg-light py-4 justify-content-center">
+          <div class="col-6">
+            <form method="POST" action="/upload-file" id="upload-form" enctype="multipart/form-data">
+              <!-- title input -->
+              <div class="form-outline mb-4">
+                <label class="form-label" for="book-title">Title</label>
+                <input type="text" name="title" required id="book-title" class="form-control" />
+              </div>
+          
+              <!-- desc input -->
+              <div class="form-outline mb-4">
+                <label class="form-label" for="desc">Description</label>
+                <textarea class="form-control" id = "desc" type="text" name="desc" required rows="4"></textarea>
+              </div>
+          
+              <!-- date input -->
+              <div class="form-outline mb-4">
+                <label class="form-label" for="book-date">Publishing Date</label>
+                <input type="month" name="pubdate" required id="book-date" class="form-control" />
+              </div>
+          
+              <!-- authour input -->
+              <div class="form-outline mb-4">
+                <label class="form-label" for="book-authour">Authour</label>
+                <input type="text" name="authour" required id="book-authour" class="form-control" />
+              </div>
+          
+              <!-- file input -->
+              <div class="form-outline mb-4">
+                <label class="form-label" for="inputFile">Upload file</label>
+                <input type="file" name="file" id="inputFile" required accept="application/pdf" class="form-control"/>
+              </div>
+            
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-primary btn-block mb-4" id="upload-book">Upload Book</button>
+            </form>
+          </div>
+      </div>
+    </div>
+    <%- include("./partials/footer.ejs") %>
   </div>
-  <%- include("./partials/footer.ejs") %>
   <%- include("./partials/script.ejs") %>
 </body>
 </html>

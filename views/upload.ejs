@@ -3,47 +3,49 @@
 
 <body>
   <%- include("./partials/nav2.ejs") %>
-
-  <div class="row">
-    <div class="container px-5 py-3">
-      <div class="col-12">
-        <h2>Your Books</h2>
-      </div>
-
-    </div>
-  </div>
-  <div class="row content-row bg-light py-4">
-    <% if (books.length> 0) { %>
-      <% books.forEach(book=> { %>
-        <%if(book.uploaderid == user.id){%>
-          <a class="single" , href="/upload/<%=book._id%>">
-            <div class="container section p-3">
-              <p>
-                <h3>
-                  <%= book.title %>
-                </h3>
-                <%= book.authour%><br>
-                <%= book.pubdate.split('-')[0]%>
-              </p>
-            </div>
-          </a>
-        <%} else {%>
-      
-        <%}%>
-      <% }) %>
-      <% } else { %>
-        <div class="container section p-3">
-          <p>There are no books to display...</p>
+  <div class="flex-wrapper">
+    <div class="container-box">
+      <div class="row">
+        <div class="container px-5 py-3">
+          <div class="col-12">
+            <h2>Your Books</h2>
+          </div>
+    
         </div>
-      <% } %>
-  </div>
-  <div class="row justify-content-center p-5">
-    <div class="col-2 d-flex justify-content-center">
-      <button type="button" id="upload-file-button" class="btn btn-primary">Upload New Book</button>
+      </div>
+      <div class="row content-row bg-light py-4">
+        <% if (books.length> 0) { %>
+          <% books.forEach(book=> { %>
+            <%if(book.uploaderid == user.id){%>
+              <a class="single" , href="/upload/<%=book._id%>">
+                <div class="container section p-3">
+                  <p>
+                    <h3>
+                      <%= book.title %>
+                    </h3>
+                    <%= book.authour%><br>
+                    <%= book.pubdate.split('-')[0]%>
+                  </p>
+                </div>
+              </a>
+            <%} else {%>
+          
+            <%}%>
+          <% }) %>
+          <% } else { %>
+            <div class="container section p-3">
+              <p>There are no books to display...</p>
+            </div>
+          <% } %>
+      </div>
+      <div class="row justify-content-center p-5">
+        <div class="col-2 d-flex justify-content-center">
+          <button type="button" id="upload-file-button" class="btn btn-primary">Upload New Book</button>
+        </div>
+      </div>
     </div>
+    <%- include("./partials/footer.ejs") %>
   </div>
-  
-  <%- include("./partials/footer.ejs") %>
   <%- include("./partials/script.ejs") %>
 </body>
 </html>

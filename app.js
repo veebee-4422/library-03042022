@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 var passport = require('passport');
 const morgan = require('morgan');
+const favicon = require('serve-favicon');
 var routes = require('./routes/index');
 const database = require('./config/database');
 require('dotenv').config();
@@ -29,10 +30,10 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(favicon(__dirname + '/public/images/icon.ico'));
 app.use(routes);
 app.use((req, res)=>{
-    res.status(404).render('404');
+    res.status(404).render('404', {page: '404'});
 });
 
 app.listen(process.env.PORT || 3000);

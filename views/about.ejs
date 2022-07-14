@@ -6,27 +6,29 @@
         <% } else if(logged==true){%>
             <%- include("./partials/nav2.ejs") %>
         <% } %>
-        <div class="container">
-            <div class="row p-3">
-                <div class="col-12">
-                    <h2>About Us</h2>
-                    <p>Library Genesis is an online library service. Here, you can search for any
-                        books you want, view them, or contribute and upload books
-                        to the library, provided you have an account, as well!
-                    </p>
-                    <p> If you are not logged in to your account, you may not upload books. You do
-                        not need to be logged in or have an account to view
-                        books uploaded by others. If you do not have an account, you may register
-                        and create one.
-                        Once you are logged in, you can view all your uploads and delete any of your
-                        own uploads.</p>
-                    <p>You can search for books with their titles, authours, publishing dates, or
-                        keywords in their descriptions.</p>
+        <div class="flex-wrapper">
+            <div class="container">
+                <div class="row p-3">
+                    <div class="col-12">
+                        <h2>About Us</h2>
+                        <p>Library Genesis is an online library service. Here, you can search for any
+                            books you want, view them, or contribute and upload books
+                            to the library, provided you have an account, as well!
+                        </p>
+                        <p> If you are not logged in to your account, you may not upload books. You do
+                            not need to be logged in or have an account to view
+                            books uploaded by others. If you do not have an account, you may register
+                            and create one.
+                            Once you are logged in, you can view all your uploads and delete any of your
+                            own uploads.</p>
+                        <p>You can search for books with their titles, authours, publishing dates, or
+                            keywords in their descriptions.</p>
+                    </div>
                 </div>
+                <br>
             </div>
-            <br>
-        </div>
-        <%- include("./partials/footer.ejs") %>
+            <%- include("./partials/footer.ejs") %>
+          </div>
         <%- include("./partials/script.ejs") %>
     </body>
 

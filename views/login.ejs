@@ -29,42 +29,46 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <% } %>
-  <div class="row">
-    <div class="container px-5 py-3">
-        <div class="col-12">
-            <h2>Login Page</h2>
-        </div>
-    </div>
-  </div>
-  <div class="row content-row bg-light py-4 justify-content-center">
-      <div class="col-6">
-          <form method="POST" action="/login" id="login-form">
-              <!-- Email input -->
-              <div class="form-floating row mb-3">
-                  <input type="text" name="username" class="form-control" id="floatingInput"
-                      placeholder="name@example.com">
-                  <label for="floatingInput">Username</label>
+    <div class="flex-wrapper">
+        <div class="container-box">
+            <div class="row">
+                <div class="container px-5 py-3">
+                    <div class="col-12">
+                        <h2>Login Page</h2>
+                    </div>
+                </div>
               </div>
-              <div class="form-floating row mb-3">
-                  <input type="password" name="password" class="form-control" id="floatingPassword"
-                      placeholder="Password">
-                  <label for="floatingPassword">Password</label>
-              </div>
-              <!-- Submit button -->
-              <div class="submit-button row justify-content-center">
-                  <div class="col-3 d-flex justify-content-center">
-                      <button type="button" class="btn btn-primary btn-block mb-4" id="login-button" onclick="">Sign
-                          in</button>
+              <div class="row content-row bg-light py-4 justify-content-center">
+                  <div class="col-6">
+                      <form method="POST" action="/login" id="login-form">
+                          <!-- Email input -->
+                          <div class="form-floating row mb-3">
+                              <input type="text" name="username" class="form-control" id="floatingInput"
+                                  placeholder="name@example.com">
+                              <label for="floatingInput">Username</label>
+                          </div>
+                          <div class="form-floating row mb-3">
+                              <input type="password" name="password" class="form-control" id="floatingPassword"
+                                  placeholder="Password">
+                              <label for="floatingPassword">Password</label>
+                          </div>
+                          <!-- Submit button -->
+                          <div class="submit-button row justify-content-center">
+                              <div class="col-3 d-flex justify-content-center">
+                                  <button type="button" class="btn btn-primary btn-block mb-4" id="login-button" onclick="">Sign
+                                      in</button>
+                              </div>
+                          </div>
+                          <!-- Register buttons -->
+                          <div class="text-center row">
+                              <p>Not a member? <a href="/register">Register</a></p>
+                          </div>
+                      </form>
                   </div>
               </div>
-              <!-- Register buttons -->
-              <div class="text-center row">
-                  <p>Not a member? <a href="/register">Register</a></p>
-              </div>
-          </form>
+        </div>
+        <%- include("./partials/footer.ejs") %>
       </div>
-  </div>
-  <%- include("./partials/footer.ejs") %>
   <%- include("./partials/script.ejs") %>
 </body>
 </html>

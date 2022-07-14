@@ -3,25 +3,28 @@
 
 <body>
   <%- include("./partials/nav.ejs") %>
-  <div class="container">
-    <div class="row">
-        <div class="col-md-12 p-5">
-            <div class="error-template">
-                <h2>
-                    404: Not Found</h2>
-                <div class="error-details py-3">
-                    Requested page not found.
-                </div>
-                <div class="error-actions py-5">
-                    <a href="/" class="btn btn-primary btn-lg">
-                        Back to Home
-                      </a>
+  <div class="flex-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 p-5">
+                <div class="error-template">
+                    <h2>
+                        404: Not Found</h2>
+                    <div class="error-details py-3">
+                        Requested page not found.
+                    </div>
+                    <div class="error-actions py-5">
+                        <a href="/" class="btn btn-primary btn-lg">
+                            Back to Home
+                          </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-  <%- include("./partials/footer.ejs") %>
+    <%- include("./partials/footer.ejs") %>
+  </div>
+
   <%- include("./partials/script.ejs") %>
 </body>
 </html>
